@@ -10,5 +10,5 @@ for sensor in "dark" "univ"
 do
   echo "Importing data for honeypot [$sensor] and date [$day]."
   gunzip -c ${honeypot_dir}/${sensor}_conn_log_${day}.bro.gz | \
-    $VAST import bro "id.resp_h == 91.216.216.10 || id.resp_h == 141.22.213.43"
+    vast import bro "id.resp_h == 91.216.216.10 || id.resp_h == 141.22.213.43"
 done
