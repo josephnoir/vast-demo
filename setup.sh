@@ -74,4 +74,4 @@ scp localadmin@mobi7.inet.haw-hamburg.de:/users/localadmin/persistent_vast/bmbf-
 cd $ROOT_DIR
 
 echo "DONE"
-echo "please 'export PATH=\$PATH:$ROOT_DIR/vast/build/bin/vast:$ROOT_DIR/bro-aux-0.39/build/bro-cut'"
+echo "please 'export PATH=\$PATH:$ROOT_DIR/vast/build/bin:$ROOT_DIR/bro-aux-0.39/build/bro-cut'"
