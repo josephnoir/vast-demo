@@ -57,6 +57,7 @@ cd $ROOT_DIR
 rm -f $BRO_FILE
 
 echo "Downloading BGP updates"
+mkdir bgp
 ./bgp_download_routeviews_all_updates.sh
 cd $ROOT_DIR
 

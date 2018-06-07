@@ -4,6 +4,7 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 bgp_dir="$dir/bgp/routeviews"
 bgp_url="http://archive.routeviews.org"
 
+mkdir $bgp_dir
 ls $bgp_dir
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
