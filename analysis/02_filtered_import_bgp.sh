@@ -34,8 +34,8 @@ do
   done
 done
 
-#cat .commands.txt | while read i; do printf "%q\n" "$i"; done | xargs -n 24 bash -c
+cat .commands.txt | while read i; do printf "%q\n" "$i"; done | xargs -n 24 bash -c
 
-#rm .commands.txt
+rm .commands.txt
 
 } 2>/dev/null
