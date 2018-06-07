@@ -17,27 +17,27 @@ echo "Using $cores cores for compilation."
 echo "Building CAF"
 if cd actor-framework
 then
-  git pull
+  echo "CAF already exists"
 else
   git clone https://github.com/actor-framework/actor-framework.git
+  cd $ROOT_DIR/actor-framework
+  git checkout cdfe2c22
+  ./configure --no-opencl --no-tools --no-examples --build-type=release
+  make -j$cores
 fi
-cd $ROOT_DIR/actor-framework
-git checkout cdfe2c22
-./configure --no-opencl --no-tools --no-examples --build-type=release
-make -j$cores
 cd $ROOT_DIR
 
 echo "Building VAST"
 if cd vast
 then
-  git pull
+  echo "VAST already exists"
 else
   git clone https://github.com/vast-io/vast.git
+  cd $ROOT_DIR/vast
+  git checkout 2b761725
+  ./configure --build-type=release --with-caf=$ROOT_DIR/actor-framework/build/
+  make -j$cores
 fi
-cd $ROOT_DIR/vast
-git checkout 2b761725
-./configure --build-type=release --with-caf=$ROOT_DIR/actor-framework/build/
-make -j$cores
 cd $ROOT_DIR
 
 echo "Building Bro Aux tools"
@@ -57,20 +57,35 @@ cd $ROOT_DIR
 rm -f $BRO_FILE
 
 echo "Downloading BGP updates"
-mkdir bgp
-./bgp_download_routeviews_all_updates.sh
+if cd bgp
+then
+  echo "bgp already downloaded?"
+else
+  mkdir bgp
+  ./bgp_download_routeviews_all_updates.sh
+fi
 cd $ROOT_DIR
 
 echo "Downloading conn logs"
-mkdir honeypot
-cd $ROOT_DIR/honeypot
-scp localadmin@mobi7.inet.haw-hamburg.de:/users/localadmin/persistent_vast/bmbf-demo/honeypot/* ./
+if cd honeypot
+then
+  echo "honeypot data already downloaded"
+else
+  mkdir honeypot
+  cd $ROOT_DIR/honeypot
+  scp localadmin@mobi7.inet.haw-hamburg.de:/users/localadmin/persistent_vast/bmbf-demo/honeypot/* ./
+fi
 cd $ROOT_DIR
 
 echo "Downloading intelmq logs"
-mkdir intelmq
-cd $ROOT_DIR/intelmq
-scp localadmin@mobi7.inet.haw-hamburg.de:/users/localadmin/persistent_vast/bmbf-demo/intelmq/* ./
+if cd intelmq
+then
+  echo "intelmq data already downloaded"
+else
+  mkdir intelmq
+  cd $ROOT_DIR/intelmq
+  scp localadmin@mobi7.inet.haw-hamburg.de:/users/localadmin/persistent_vast/bmbf-demo/intelmq/* ./
+fi
 cd $ROOT_DIR
 
 echo "DONE"

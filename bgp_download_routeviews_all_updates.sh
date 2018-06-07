@@ -24,11 +24,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     for cl in "${collectors[@]}"
     do
       mkdir -p "${bgp_dir}/${cl}"
-      for i in {00..23}
+      for i in 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23
       do
         for j in 00 15 30 45
         do
-          (cd "${bgp_dir}/${cl}" && curl -O "${bgp_url}/${cl}/bgpdata/${year}.${month}/UPDATES/updates.${year}${month}${day}."$i$j".bz2")
+          filename="updates.${year}${month}${day}.${i}${j}.bz2"
+          curl -o ${bgp_dir}/${cl}/${filename} ${bgp_url}/${cl}/bgpdata/${year}.${month}/UPDATES/${filename}
         done
       done
     done
